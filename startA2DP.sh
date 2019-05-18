@@ -2,6 +2,7 @@
 # This shell script must be run with sudo/root privileges
 # Place this shell script in /home/pi
 # Add "sudo /home/pi/startA2DP.sh" (without quotes) to the end of /home/pi/.profile to run automatically after login
+# Alternatively add to the end of /etc/xdg/lxsession/LXDE-pi/autostart for system-wide automatic run
 # Don't forget to <sudo chmod +x /home/pi/startA2DP.sh> to mark as executable
 # Before first run, do: <sudo apt-get update>, then <sudo apt-get upgrade>, and then: <sudo apt-get install bluealsa python-dbus>
 # Make RPi discoverable over bluetooth (click on BT icon in taskbar)
@@ -18,8 +19,6 @@ echo "Starting A2DP..."
 rm /var/run/bluealsa/*
 
 # Start A2DP receiver stream, wait 1 sec, then route to headphone jack
-bluealsa -p a2dp-sink & sleep 1s; bluealsa-aplay --pcm-buffer-time=170000 --pcm-period-time=10000 -vv 00:00:00:00:00:00 &
+bluealsa -p a2dp-sink & sleep 1s; bluealsa-aplay --pcm-buffer-time=135000 --pcm-period-time=33750 -vv 00:00:00:00:00:00 &
 
 echo "A2DP Started."
-
-exit(0)
