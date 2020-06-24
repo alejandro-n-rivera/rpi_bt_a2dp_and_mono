@@ -18,6 +18,9 @@ echo "Starting A2DP..."
 # Remove old files in case of bad prev. exit
 rm /var/run/bluealsa/*
 
+# Kill any running bluealsa process
+killall bluealsa
+
 # Start A2DP receiver stream, wait 1 sec, then route to headphone jack
 bluealsa -p a2dp-sink & sleep 1s; bluealsa-aplay --pcm-buffer-time=135000 --pcm-period-time=33750 -vv 00:00:00:00:00:00 &
 
